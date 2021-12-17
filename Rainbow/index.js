@@ -14,14 +14,13 @@ function randomSign() {
 
 new p5(sk => {
 
+    let width = 2 * (config.arcs.thickness + config.arcs.distance) * config.arcs.num;
+    let height = width;
+
     sk.colorMode(sk.HSB, 1);
     sk.setup = function setup() {
-        sk.createCanvas(sk.windowWidth, sk.windowHeight);
+        sk.createCanvas(width, height);
     }
-
-    // position of the center
-    let centerX = sk.windowWidth / 2;
-    let centerY = sk.windowHeight / 2;
 
     // create the arcs in the background
     let hueInc = config.arcs.monoColor ? 0 : uniform(1 / config.arcs.num / 10, 1 / config.arcs.num / 2);
@@ -42,8 +41,6 @@ new p5(sk => {
                 uniform(config.arcs.backgroundArcs.minSpeed, config.arcs.backgroundArcs.maxSpeed),
                 randomSign(),
                 uniform(config.arcs.minGrowth, config.arcs.maxGrowth),
-                centerX,
-                centerY,
                 2 * (config.arcs.thickness + config.arcs.distance) * i,
             ))
         }
@@ -60,8 +57,6 @@ new p5(sk => {
             uniform(config.arcs.minSpeed, config.arcs.maxSpeed),
             randomSign(),
             uniform(config.arcs.minGrowth, config.arcs.maxGrowth),
-            centerX,
-            centerY,
             2 * (config.arcs.thickness + config.arcs.distance) * i,
         ))
     }
@@ -75,8 +70,6 @@ new p5(sk => {
                 config.whiteArcs.thickness,
                 uniform(config.whiteArcs.minLength * 2 * sk.PI, config.whiteArcs.maxLength * 2 * sk.PI),
                 uniform(0, 2 * sk.PI),
-                centerX,
-                centerY,
                 (Math.floor(uniform(1, config.arcs.num)) + 0.5) * 2 * (config.arcs.thickness + config.arcs.distance),
             ))
         }
@@ -92,8 +85,6 @@ new p5(sk => {
                 uniform(0, 2 * sk.PI),
                 uniform(config.triangles.minSpeed, config.triangles.maxSpeed),
                 randomSign(),
-                centerX,
-                centerY,
                 (Math.floor(uniform(1, config.arcs.num)) + 0.5) * 2 * (config.arcs.thickness + config.arcs.distance),
             ))
         }
@@ -104,12 +95,16 @@ new p5(sk => {
     let time = 0;
     sk.draw = function draw() {
 
+        // position of the center
+        let centerX = width / 2;
+        let centerY = height / 2;
+
         sk.clear()
         sk.noFill();
 
-        arcs.forEach(arc => arc.draw(sk, time, config.resolutionFactor));
-        whiteArcs.forEach(arc => arc.draw(sk));
-        triangles.forEach(triangle => triangle.draw(sk, time));
+        arcs.forEach(arc => arc.draw(sk, time, config.resolutionFactor, centerX, centerY));
+        whiteArcs.forEach(arc => arc.draw(sk, centerX, centerY));
+        triangles.forEach(triangle => triangle.draw(sk, time, centerX, centerY));
 
         time += 0.01 * config.speedFactor;
 

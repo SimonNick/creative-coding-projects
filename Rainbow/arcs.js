@@ -1,5 +1,5 @@
 export class GradientArc {
-    constructor(color, thickness, decreaseSize, startLength, startHeadAngle, rotationSpeed, rotationSign, arcGrowthSpeed, centerX, centerY, diameter) {
+    constructor(color, thickness, decreaseSize, startLength, startHeadAngle, rotationSpeed, rotationSign, arcGrowthSpeed, diameter) {
         this.color = color;
         this.thickness = thickness;
         this.decreaseSize = decreaseSize;
@@ -9,8 +9,6 @@ export class GradientArc {
         this.rotationSign = rotationSign;
         this.arcGrowthSpeed = arcGrowthSpeed;
 
-        this.centerX = centerX;
-        this.centerY = centerY;
         this.diameter = diameter;
     }
 
@@ -26,14 +24,14 @@ export class GradientArc {
         return this.startLength + time * this.arcGrowthSpeed;
     }
 
-    draw(sk, time, resolutionFactor) {
+    draw(sk, time, resolutionFactor, centerX, centerY) {
         let headColor = this.color;
         let tailColor = withAlpha(sk, this.color, 0);
 
         drawGradientArc(
             sk,
-            this.centerX,
-            this.centerY,
+            centerX,
+            centerY,
             this.diameter,
             this.diameter,
             this.calculateCurrentHeadAngle(time),
@@ -48,23 +46,21 @@ export class GradientArc {
 }
 
 export class SimpleArc {
-    constructor(color, thickness, arcLength, headAngle, centerX, centerY, diameter) {
+    constructor(color, thickness, arcLength, headAngle, diameter) {
         this.color = color;
         this.thickness = thickness;
         this.arcLength = arcLength;
         this.headAngle = headAngle;
 
-        this.centerX = centerX;
-        this.centerY = centerY;
         this.diameter = diameter;
     }
 
-    draw(sk) {
+    draw(sk, centerX, centerY) {
         sk.strokeWeight(this.thickness);
         sk.stroke(this.color);
         sk.arc(
-            this.centerX,
-            this.centerY,
+            centerX,
+            centerY,
             this.diameter,
             this.diameter,
             this.headAngle,
@@ -75,15 +71,13 @@ export class SimpleArc {
 
 export class CircularSector {
 
-    constructor(color, arcLength, startHeadAngle, rotationSpeed, rotationSign, centerX, centerY, diameter) {
+    constructor(color, arcLength, startHeadAngle, rotationSpeed, rotationSign, diameter) {
         this.color = color;
         this.arcLength = arcLength;
         this.startHeadAngle = startHeadAngle;
         this.rotationSpeed = rotationSpeed;
         this.rotationSign = rotationSign;
 
-        this.centerX = centerX;
-        this.centerY = centerY;
         this.diameter = diameter;
     }
 
@@ -91,12 +85,12 @@ export class CircularSector {
         return this.startHeadAngle + this.rotationSign * time * this.rotationSpeed;
     }
 
-    draw(sk, time) {
+    draw(sk, time, centerX, centerY) {
         sk.noStroke();
         sk.fill(this.color);
         sk.arc(
-            this.centerX,
-            this.centerY,
+            centerX,
+            centerY,
             this.diameter,
             this.diameter,
             this.calculateCurrentHeadAngle(time),
