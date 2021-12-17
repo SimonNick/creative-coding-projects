@@ -1,0 +1,52 @@
+---
+arcs:
+  num: 10
+  monoColor: false
+  minBrightness: 0.9
+  maxBrightness: 0.95
+  minSaturation: 0.6
+  maxSaturation: 0.9
+  minLength: 0.25
+  maxLength: 0.6
+  minSpeed: 0.2
+  maxSpeed: 0.5
+  minGrowth: 0
+  maxGrowth: 0.01
+  thickness: 12
+  distance: 3
+
+  ghost:
+    active: false
+
+  backgroundArcs:
+    active: false
+    minBrightness: 0.3
+    maxBrightness: 0.4
+    minSaturation: 0.5
+    maxSaturation: 0.5
+    minLength: 0.5
+    maxLength: 0.8
+    minSpeed: 0.5
+    maxSpeed: 1.5
+
+whiteArcs:
+  active: true
+  minBrightness: 0.5
+  maxBrightness: 0.9
+  minLength: 0.5
+  maxLength: 0.75
+  thickness: 2
+  num: 2
+
+triangles:
+  active: false
+  minBrightness: 0.1
+  maxBrightness: 0.2
+  minLength: 0.25
+  maxLength: 0.5
+  minSpeed: 0.025
+  maxSpeed: 0.625
+  num: 2
+
+resolutionFactor: 1
+speedFactor: 1

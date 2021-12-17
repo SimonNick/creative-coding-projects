@@ -42,6 +42,15 @@ module.exports = (env, argv) => {
             path: path.resolve(__dirname, '.'),
             filename: BUNDLE_NAME
         },
-        plugins: plugin_lst
+        plugins: plugin_lst,
+        module: {
+            rules: [
+                {
+                test: /\.ya?ml$/,
+                  include: path.resolve(process.cwd(), '/'),
+                loader: 'js-yaml-loader'
+                },
+            ]
+        }
     }
 };
