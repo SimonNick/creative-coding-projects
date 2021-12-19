@@ -36,10 +36,10 @@ new p5(sk => {
                 sk.color(hues[i] % 1, uniform(config.arcs.backgroundArcs.minSaturation, config.arcs.backgroundArcs.maxSaturation), uniform(config.arcs.backgroundArcs.minBrightness, config.arcs.backgroundArcs.maxBrightness)),
                 config.arcs.thickness,
                 config.arcs.ghost.active,
-                uniform(config.arcs.backgroundArcs.minLength * 2 * sk.PI, config.arcs.backgroundArcs.maxLength * 2 * sk.PI),
-                uniform(0, 2 * sk.PI),
+                uniform(config.arcs.backgroundArcs.minLength, config.arcs.backgroundArcs.maxLength) * 2 * sk.PI,
+                config.arcs.backgroundArcs.randomStartAngle ? uniform(0, 1) * 2 * sk.PI : 0,
                 uniform(config.arcs.backgroundArcs.minSpeed, config.arcs.backgroundArcs.maxSpeed),
-                randomSign(),
+                config.arcs.backgroundArcs.randomDirection ? randomSign() : 1,
                 uniform(config.arcs.minGrowth, config.arcs.maxGrowth),
                 2 * (config.arcs.thickness + config.arcs.distance) * i,
             ))
@@ -52,10 +52,10 @@ new p5(sk => {
             sk.color(hues[i] % 1, uniform(config.arcs.minSaturation, config.arcs.maxSaturation), uniform(config.arcs.minBrightness, config.arcs.maxBrightness), 1),
             config.arcs.thickness,
             config.arcs.ghost.active,
-            uniform(config.arcs.minLength * 2 * sk.PI, config.arcs.maxLength * 2 * sk.PI),
-            uniform(0, 2 * sk.PI),
+            uniform(config.arcs.minLength, config.arcs.maxLength) * 2 * sk.PI,
+            config.arcs.randomStartAngle ? uniform(0, 1) * 2 * sk.PI : 0,
             uniform(config.arcs.minSpeed, config.arcs.maxSpeed),
-            randomSign(),
+            config.arcs.randomDirection ? randomSign() : 1,
             uniform(config.arcs.minGrowth, config.arcs.maxGrowth),
             2 * (config.arcs.thickness + config.arcs.distance) * i,
         ))
@@ -68,8 +68,8 @@ new p5(sk => {
             whiteArcs.push(new SimpleArc(
                 sk.color(0, 0, uniform(config.whiteArcs.minBrightness, config.whiteArcs.maxBrightness)),
                 config.whiteArcs.thickness,
-                uniform(config.whiteArcs.minLength * 2 * sk.PI, config.whiteArcs.maxLength * 2 * sk.PI),
-                uniform(0, 2 * sk.PI),
+                uniform(config.whiteArcs.minLength, config.whiteArcs.maxLength) * 2 * sk.PI,
+                uniform(0, 1) * 2 * sk.PI,
                 (Math.floor(uniform(1, config.arcs.num)) + 0.5) * 2 * (config.arcs.thickness + config.arcs.distance),
             ))
         }
@@ -81,8 +81,8 @@ new p5(sk => {
         for (var i = 0; i < config.triangles.num; i++) {
             triangles.push(new CircularSector(
                 sk.color(0, 0, 1, uniform(config.triangles.minBrightness, config.triangles.maxBrightness)),
-                uniform(config.triangles.minLength * 2 * sk.PI, config.triangles.minLength * 2 * sk.PI),
-                uniform(0, 2 * sk.PI),
+                uniform(config.triangles.minLength, config.triangles.minLength) * 2 * sk.PI,
+                uniform(0, 1) * 2 * sk.PI,
                 uniform(config.triangles.minSpeed, config.triangles.maxSpeed),
                 randomSign(),
                 (Math.floor(uniform(1, config.arcs.num)) + 0.5) * 2 * (config.arcs.thickness + config.arcs.distance),

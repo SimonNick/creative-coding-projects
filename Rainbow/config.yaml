@@ -14,6 +14,8 @@ arcs:
   maxGrowth: 0.01
   thickness: 12
   distance: 3
+  randomDirection: true
+  randomStartAngle: true
 
   ghost:
     active: false
@@ -28,6 +30,8 @@ arcs:
     maxLength: 0.8
     minSpeed: 0.5
     maxSpeed: 1.5
+    randomDirection: true
+    randomStartAngle: true
 
 whiteArcs:
   active: true
@@ -40,13 +44,15 @@ whiteArcs:
 
 triangles:
   active: false
+  num: 2
   minBrightness: 0.1
   maxBrightness: 0.2
   minLength: 0.25
   maxLength: 0.5
   minSpeed: 0.025
   maxSpeed: 0.625
-  num: 2
+  randomDirection: true
+  randomStartAngle: true
 
 resolutionFactor: 1
 speedFactor: 1
